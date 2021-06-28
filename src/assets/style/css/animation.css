@@ -1,0 +1,32 @@
+@keyframes box_rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(80deg);
+  }
+  50% {
+    transform: rotate(160deg);
+  }
+  75% {
+    transform: rotate(280deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes box_scale {
+  form {
+    top: 0%;
+  }
+  50% {
+    top: 25%;
+  }
+  75% {
+    top: 60%;
+  }
+  to {
+    top: 50%;
+  }
+}
