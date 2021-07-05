@@ -4,16 +4,16 @@
       <i class="iconfont icon-wangyiyunyinle"></i>
     </div>
     <div class='history_select'>
-      <i class="iconfont icon-arrows-r" @click="history.back()"></i>
-      <i class="iconfont icon-jiantou" @click="history.go()"></i>
+      <i class="iconfont icon-arrows-r"></i>
+      <i class="iconfont icon-jiantou"></i>
     </div>
     <div class="search">
       <input type="text" placeholder="输入搜索的音乐">
       <i class="iconfont icon-search" @click="searchMusic"></i>
     </div>
     <!-- 登录 -->
-    <div class="login_box" @click="LoginClick">
-      <span>
+    <div class="login_box">
+      <span @click='logunClick'>
         <i v-show="!userInfo.avatarUrl" class="icon-denglu iconfont"></i>
       <img :src="userInfo.avatarUrl" alt="">
        {{ userInfo.nickname ? userInfo.nickname : '登录 / 注册' }}
@@ -23,10 +23,12 @@
         <a href="https://gitee.com/lysimportant" target="_blank">
           <i class="iconfont icon-mayun"></i>
         </a>
-        <i class="iconfont icon-huaban88"></i>
+        <a href="https://github.com/lysimportant" target="_blank">
+         <i class="iconfont icon-huaban88"></i>
+        </a>
       </span>
     </div>
-    
+
   </div>
 </template>
 
@@ -43,8 +45,10 @@ export default {
     searchMusic () {
       console.log('searchMusic')
     },
-    LoginClick () {
-      this.$emit('homeLoginClick')
+    logunClick () {
+      if (!this.userInfo.nickname) {
+        this.$router.push('/login')
+      }
     }
   },
   computed: {
@@ -92,21 +96,23 @@ export default {
     position absolute
     right 200px
     span
+      margin-left 35px!important
       img
-        margin-top 5px
-        wdith 50px
-        height 50px
+        wdith 40px
+        height 40px
         vertical-align: middle;
         border-radius 50%
     .icon_a
       position absolute
-      top 5px
+      //top 5px
       margin 0 20px
       .icon-mayun
         font-size 40px
+        color black
         &:hover
           color red
       .icon-huaban88
+        color black
         padding 0 10px
         font-size 41px
         &:hover

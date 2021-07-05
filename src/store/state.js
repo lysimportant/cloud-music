@@ -1,3 +1,3 @@
 export default {
-	userInfo: {} // 存放用户资料
+  userInfo: {} // 存放用户资料
 }

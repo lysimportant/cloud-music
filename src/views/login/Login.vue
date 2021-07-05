@@ -11,7 +11,7 @@
 <!--        登录-->
         <el-form :model="login" :rules="loginRules" ref="longinRuleForm" label-width="100px" v-show="loginShow">
           <el-form-item label='手机号:' prop="phone">
-            <el-input type='number' v-model="login.phone" placeholder='请输入手机号码'/>
+            <el-input v-model="login.phone" placeholder='请输入手机号码'/>
           </el-form-item>
           <el-form-item label='密码: ' prop="password">
             <el-input type='password' v-model="login.password" placeholder='请输入密码'/>
@@ -20,7 +20,7 @@
 <!--        注册-->
         <el-form :model="login" :rules="loginRules" ref="registerRuleForm" label-width="100px" v-show="!loginShow">
         <el-form-item label='手机号: ' prop="phone">
-          <el-input type='number' v-model="login.phone" placeholder='注册的手机号码'/>
+          <el-input v-model="login.phone" placeholder='注册的手机号码'/>
         </el-form-item>
         <el-form-item label='密码: ' prop="password">
           <el-input type='password' v-model="login.password" placeholder='验证码'/>
@@ -67,16 +67,16 @@ export default {
     }
   },
   methods: {
-    backClick () {
-      this.isBack = true
-      this.$emit('loginCLick')
-    },
     loginPwd () {
       this.$refs.longinRuleForm.validate(async vaild => {
-        if (!vaild) return
+        if (!vaild) return this.$message.error('验证失败!重新输入~')
         this.$store.dispatch('getUserInfo', this.login)
-        this.$emit('loginCLick')
+        this.$message.success('登录成功~')
+        this.$router.push('/home')
       })
+    },
+    backClick () {
+      this.$router.back()
     }
   }
 }
