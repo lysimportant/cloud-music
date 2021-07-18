@@ -1,46 +1,58 @@
 <template>
-  <div class='home'>
     <el-container>
       <el-header>
         <home-header/>
       </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside
+          width="200px"
+          :class="{ aside_hide: !asideIsActive }"
+        >
           <home-aside-nav-bar/>
         </el-aside>
         <el-main>
-          <home-top-nav-bar></home-top-nav-bar>
-          <router-view/>
+          <!-- <home-top-nav-bar v-show="$route.meta.noTopNav !== true"/> -->
+<!--          <keep-alive exclude=/detailIndex, mvIndex/>-->
+            <router-view />
+<!--          </keep-alive>-->
         </el-main>
+        <play-music  />
       </el-container>
     </el-container>
-  </div>
 </template>
 
 <script>
 import HomeHeader from './children/HomeHeader'
 import HomeAsideNavBar from './children/HomeAsideNavBar'
 import HomeTopNavBar from './children/HomeTopNavBar'
+
+import PlayMusic from '@/views/playmusic/PlayMusic'
 export default {
   name: 'Home',
-  props: {},
   components: {
     HomeHeader,
     HomeAsideNavBar,
-    HomeTopNavBar
+    HomeTopNavBar,
+    PlayMusic
+  },
+  mounted () {
+    this.$bus.$on('asideChange', val => {
+      console.log(val)
+      this.asideIsActive = val
+    })
   },
   data () {
     return {
+      asideIsActive: true
     }
-  },
-  methods: {
   }
 }
 </script>
 
 <style scoped>
-.el-container, .home{
-  height: 100%
+.el-container {
+  height: 100%;
+  overflow: hidden;
 }
 .el-header {
   background-color: rgba(249, 249, 249, .5);
@@ -49,10 +61,17 @@ export default {
   margin-bottom: 2px;
 }
 .el-aside {
-  /* background-color: #F9F9F9; */
+   /*background-color: #F9F9F9;*/
+  transition: all .3s;
   border-right: 1px solid rgba(200, 200, 200, .3);
 }
 .el-main {
-  padding: 10px 20px;
+  position: relative;
+  padding:  0 100px 10px;
 }
+.aside_hide {
+  transform: rotateY(90deg);
+  width: 0px !important;
+}
+
 </style>

@@ -30,3 +30,52 @@
     top: 50%;
   }
 }
+
+@keyframes songs_top_bottom {
+  form {
+    top: -20%;
+  }
+  50% {
+    top: -10%;
+  }
+  75% {
+    top: -5%;
+  }
+  to {
+    top: 0%;
+  }
+}
+/*@keyframes Aside_open {*/
+/*  form {*/
+/*    width: 0px;*/
+/*  }*/
+/*  25% {*/
+/*    width: 50px;*/
+/*  }*/
+/*  50% {*/
+/*    width: 100px;*/
+/*  }*/
+/*  75% {*/
+/*    width: 150px;*/
+/*  }*/
+/*  to {*/
+/*    width: 200px;*/
+/*  }*/
+/*}*/
+/*@keyframes Aside_close {*/
+/*  form {*/
+/*    width: 200px;*/
+/*  }*/
+/*  25% {*/
+/*    width: 150px;*/
+/*  }*/
+/*  50% {*/
+/*    width: 50px;*/
+/*  }*/
+/*  75% {*/
+/*    width: 25px;*/
+/*  }*/
+/*  to {*/
+/*    width: 0px;*/
+/*  }*/
+/*}*/

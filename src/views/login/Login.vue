@@ -1,44 +1,70 @@
 <template>
-    <div class="login_container">
-      <div class="login_box">
-        <div class="back" @click="backClick">
-          <i class="iconfont icon-tuichu2"></i>
-        </div>
-        <div class="login_icon">
-          <i class="iconfont icon-wangyiyunyinle1"></i>
-          <h2>某云</h2>
-        </div>
-<!--        登录-->
-        <el-form :model="login" :rules="loginRules" ref="longinRuleForm" label-width="100px" v-show="loginShow">
-          <el-form-item label='手机号:' prop="phone">
-            <el-input v-model="login.phone" placeholder='请输入手机号码'/>
-          </el-form-item>
-          <el-form-item label='密码: ' prop="password">
-            <el-input type='password' v-model="login.password" placeholder='请输入密码'/>
-          </el-form-item>
-        </el-form>
-<!--        注册-->
-        <el-form :model="login" :rules="loginRules" ref="registerRuleForm" label-width="100px" v-show="!loginShow">
-        <el-form-item label='手机号: ' prop="phone">
-          <el-input v-model="login.phone" placeholder='注册的手机号码'/>
+  <div class="login_container">
+    <div class="login_box">
+      <div class="back" @click="backClick">
+        <i class="iconfont icon-tuichu2"></i>
+      </div>
+      <div class="login_icon">
+        <i class="iconfont icon-wangyiyunyinle1"></i>
+        <h2>某云</h2>
+      </div>
+      <!--        登录-->
+      <el-form
+        :model="login"
+        :rules="loginRules"
+        ref="longinRuleForm"
+        label-width="100px"
+        v-show="loginShow"
+      >
+        <el-form-item label="手机号:" prop="phone">
+          <el-input v-model="login.phone" placeholder="请输入手机号码" />
         </el-form-item>
-        <el-form-item label='密码: ' prop="password">
-          <el-input type='password' v-model="login.password" placeholder='验证码'/>
+        <el-form-item label="密码: " prop="password">
+          <el-input
+            type="password"
+            v-model="login.password"
+            placeholder="请输入密码"
+          />
         </el-form-item>
-        </el-form>
-        <div class="login_button">
-          <el-button type="success" :style="{ width: '250px' }" @click="loginPwd">{{ loginShow ? '登录' : '点击注册'}}</el-button>
-          <el-button
-            type="primary"
-            :style="{ width: '250px' }"
-            @click="loginShow = !loginShow,
-            $refs.longinRuleForm.resetFields()
-            $refs.registerRuleForm.resetFields()
-            "
-          >{{ loginShow ? '注册' : '返回登录'}}</el-button>
-        </div>
+      </el-form>
+      <!--        注册-->
+      <el-form
+        :model="login"
+        :rules="loginRules"
+        ref="registerRuleForm"
+        label-width="100px"
+        v-show="!loginShow"
+      >
+        <el-form-item label="手机号: " prop="phone">
+          <el-input v-model="login.phone" placeholder="注册的手机号码" />
+        </el-form-item>
+        <el-form-item label="密码: " prop="password">
+          <el-input
+            type="password"
+            v-model="login.password"
+            placeholder="验证码"
+          />
+        </el-form-item>
+      </el-form>
+      <div class="login_button">
+        <el-button
+          type="success"
+          :style="{ width: '250px' }"
+          @click="loginPwd"
+          >{{ loginShow ? "登录" : "点击注册" }}</el-button
+        >
+        <el-button
+          type="primary"
+          :style="{ width: '250px' }"
+          @click="
+            (loginShow = !loginShow), $refs.longinRuleForm.resetFields();
+            $refs.registerRuleForm.resetFields();
+          "
+          >{{ loginShow ? "注册" : "返回登录" }}</el-button
+        >
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -57,11 +83,20 @@ export default {
       loginRules: {
         phone: [
           { required: true, message: '手机号码不能为空', trigger: 'change' },
-          { pattern: /^1(3|5|7|8|9)\d{9}$/, message: '请输入正确的号码格式', trigger: 'change' }
+          {
+            pattern: /^1(3|5|7|8|9)\d{9}$/,
+            message: '请输入正确的号码格式',
+            trigger: 'change'
+          }
         ],
         password: [
           { required: true, message: '密码不能为空', trigger: 'change' },
-          { min: 6, max: 18, message: '请输入6 - 18 位数的密码', trigger: 'change' }
+          {
+            min: 6,
+            max: 18,
+            message: '请输入6 - 18 位数的密码',
+            trigger: 'change'
+          }
         ]
       }
     }
@@ -83,7 +118,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~assets/style/css/animation.css"
 .login_container
   position absolute
   top 0

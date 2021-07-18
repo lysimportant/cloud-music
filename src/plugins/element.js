@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import {
   Message,
+  Notification,
   Button,
   Container,
   Aside,
@@ -16,9 +17,28 @@ import {
   Menu,
   MenuItem,
   MenuItemGroup,
-  Submenu
+  Submenu,
+  Table,
+  TableColumn,
+  Tooltip,
+  Pagination,
+  Tabs,
+  TabPane,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  Switch
 } from 'element-ui'
-
+Vue.use(Switch)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
+Vue.use(Dropdown)
+Vue.use(TabPane)
+Vue.use(Tabs)
+Vue.use(Pagination)
+Vue.use(Tooltip)
+Vue.use(Table)
+Vue.use(TableColumn)
 Vue.use(Button)
 Vue.use(Container)
 Vue.use(Header)
@@ -36,3 +56,4 @@ Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
 Vue.use(Submenu)
 Vue.prototype.$message = Message
+Vue.prototype.$notify = Notification

@@ -1,6 +1,5 @@
 /* http://meyerweb.com/eric/tools/css/reset/ */
 /* v1.0 | 20080212 */
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -57,12 +56,12 @@ a {
 html, body, #app {
   width: 100%;
   height: 100%;
-  min-width: 1200px;
+  min-width: 95%;
 }
 .el-carousel__indicators--outside {
   position: absolute;
   left: 50%;
-  bottom: 10px;
+  bottom: -20px;
   margin: auto;
   transform: translate(-50%, -50%);
 }
@@ -76,4 +75,102 @@ html, body, #app {
 .el-carousel__button {
 	width: 8px;
 	height: 8px;
+}
+.text_hidden {
+    overflow : hidden;
+    text-overflow: ellipsis;/* 弹性伸缩盒子模型显示*/
+    display: -webkit-box;
+    /* 限制在一个块元素显示的文本的行数*/
+    -webkit-line-clamp : 2;
+    /*大设置或检索伸缩盒对象的子元素的排列方式*/
+    -webkit-box-orient: vertical;
+}
+.item_active {
+  color: #DC443E;
+}
+.songs_top_bottom {
+  animation: songs_top_bottom .5s linear forwards;
+}
+.icon-bofang {
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 35px!important;
+  text-align: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .3);
+}
+.el-tabs__active-bar {
+	background-color: #FF0000;
+}
+.el-tabs__item.is-active {
+	color: #FF0000;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+/*分页居中*/
+.el-pagination  {
+  position: relative;
+  top: 15px;
+  left: 20%;
+  transform: translate(-50%, -410%);
+  display: inline;
+}
+.el-aside {
+  width: 0px;
+}
+.clearMusic,
+.backMusic,
+.stopMusic,
+.nextMusic,
+.songMusic {
+  position: absolute;
+  right: 105px;
+  bottom: 28px;
+  width: 20px;
+  font-size: 20px;
+  height: 20px;
+  color: #FF0000;
+  z-index: 99;
+}
+.backMusic {
+  right: 80px;
+  color: #000;
+}
+.stopMusic {
+  right: 58px;
+  bottom: 36px;
+  font-size: 24px!important;
+  color: #000;
+}
+.nextMusic {
+  right: 33px;
+  color: #000;
+}
+.songMusic {
+  right: 5px;
+  font-size: 16px;
+  bottom: 25px;
+  color: #000;
+}
+.aplayer-icon {
+  width: 23px!important;
+  height: 23px!important;
+  bottom: 20px!important;
+  font-size: 10px!important;
+}
+.aplayer-volume-bar-wrap {
+  bottom: 20px!important;
+  right: 3px!important;
+}
+.aplayer-time {
+  right: 10px!important;
+  bottom: 12px!important;
+}
+.aplayer-bar {
+  bottom: 5px!important;
+  width: 99% !important;
 }

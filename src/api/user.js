@@ -7,3 +7,9 @@ export const reqPhoneLogin = data => {
     data
   })
 }
+// /login/status
+export const reqLoginState = () => {
+  return ajax({
+    url: '/login/status'
+  })
+}

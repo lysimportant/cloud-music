@@ -20,6 +20,30 @@ export default [
       {
         path: '/home/songs',
         component: () => import(/* WebpackChunkName: "songs_index" */ '@/views/songs/Songs')
+      },
+      {
+        path: '/home/detail/:id',
+        name: 'detail',
+        meta: { noTopNav: true },
+        component: () => import(/* WebpackChunkName: "detail_index" */ '@/views/detail/detailIndex')
+      },
+      {
+        path: '/home/mv',
+        name: 'mv',
+        meta: { noTopNav: true },
+        component: () => import(/* WebpackChunkName: "mv_index" */ '@/views/mv/mvIndex')
+      },
+      {
+        path: '/home/mvdetail/:id',
+        name: 'mvdetail',
+        meta: { noTopNav: true },
+        component: () => import(/* WebpackChunkName: "mv_detail" */ '@/views/mv/children/mvDetail')
+      },
+      {
+        path: '/home/search/:content',
+        name: 'search',
+        meta: { noTopNav: true },
+        component: () => import(/* WebpackChunkName: "search_index" */ '@/views/search/searchIndex')
       }
     ]
   },

@@ -13,6 +13,11 @@
       <router-link to="/home/songs">最新音乐</router-link>
     </span>
    </div>
+  <div>
+    <span>
+      <router-link to="/home/mv">最新mv</router-link>
+    </span>
+  </div>
 </div>
 </template>
 
@@ -24,10 +29,17 @@ export default {
 
 <style scoped lang="less">
 .homenav {
+  position: fixed;
+  overflow: hidden;
+  width: 100%;
   display: flex;
   align-items: center;
-  height: 30px;
+  height: 40px;
   line-height: 30px;
+  background-color: #FFF;
+  z-index: 999;
+  // margin-bottom: 40px;
+  margin-left: -100px;
   div {
     margin: 0 25px;
     text-align: center;

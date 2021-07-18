@@ -4,8 +4,8 @@
       <span class="title" :style="{backgroundColor: item.titleColor}">
         {{ item.typeTitle }}
       </span>
-      <a :href="item.url">
-        <img :src="item.imageUrl" alt="">
+      <a :href="item.url" target="_blank">
+        <img  :src="item.imageUrl" alt="">
       </a>
     </el-carousel-item>
   </el-carousel>
@@ -13,34 +13,36 @@
 
 <script>
 export default {
-  name: "individuationSwiper",
+  name: 'individuationSwiper',
   props: {
     banners: {
       type: Array,
-      default() {
-        return [];
+      default () {
+        return []
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>
+.el-carousel {
+  overflow: hidden;
+  margin: 10px 0 30px;
+}
  .el-carousel__item {
-   height:90%;
+   height: 100%;
+   overflow: hidden;
  }
 .el-carousel__item a img {
   width: 100%;
-  height: 90%;
+  height: 100%;
   border-radius: 20px;
-}
-.el-carousel {
-  margin:  10px 20px 5px;
 }
 .title {
   position: absolute;
   right: 0;
-  bottom: 22px;
+  bottom: 0;
   font-size: 12px;
   color: #fff;
   height: 10px;
