@@ -77,8 +77,8 @@ export default {
       loginShow: true,
       isBack: false,
       login: {
-        phone: '13653085354',
-        password: 'meihua520'
+        phone: '',
+        password: ''
       },
       loginRules: {
         phone: [
