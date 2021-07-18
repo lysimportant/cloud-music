@@ -18,13 +18,20 @@ export default {
         offset: 100,
         duration: 0
       })
+    },
+    play () {
+      this.$notify({
+        title: '单击即可播放音乐',
+        type: 'success',
+        dangerouslyUseHTMLString: true,
+        message: '<strong><i>不需要双击噢~</i></strong>',
+        offset: 200,
+      })
     }
   },
   mounted () {
     this.open()
-  },
-  created () {
-
+    this.play()
   }
 }
 </script>

@@ -75,6 +75,7 @@ export default {
       console.log(val)
       this.getSongDetail(val)
       this.loadmusic()
+      this.Saveing('播放歌单音乐', '请求')
     },
     getSongDetail (id) {
       reqSongListDetail(id).then(res => {

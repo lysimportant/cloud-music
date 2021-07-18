@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import VueLazyload from 'vue-lazyload'
 // import './plugins/element.js'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(ElementUI)
 // 全局css资源
 import '@/assets/style/css/reset.css'
 import '@/assets/style/css/animation.css'

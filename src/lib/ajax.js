@@ -1,5 +1,5 @@
 import axios from 'axios'
-import nprogress from 'nprogress'
+import NProgress from 'nprogress'
 /**
  *  @BSER_URL 网络请求路径
  * **/
@@ -14,13 +14,13 @@ export function ajax (config) {
   })
   // 请求拦截
   instance.interceptors.request.use(config => {
-    nprogress.start()
+    NProgress.start()
     config.headers.Authorization = window.sessionStorage.getItem('token')
     return config
   })
   // 响应拦截
   instance.interceptors.response.use(res => {
-    nprogress.done()
+    NProgress.done()
     return res
   })
   return instance(config)

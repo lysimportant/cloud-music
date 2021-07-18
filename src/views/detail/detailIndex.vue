@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <detail-header @loadmusic="loadmusic" :song-detail-list="songDetailList"/>
-    <detail-table :music-list="musicList"></detail-table>
+    <detail-table :music-list="musicList"/>
     <!-- table区域 -->
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
     },
     loadmusic () {
       // 添加音乐
-      this.musicList.forEach(item => {
+      this.musicList.slice(0, 10).forEach(item => {
         this.playMusic(item)
         console.log(item)
       })

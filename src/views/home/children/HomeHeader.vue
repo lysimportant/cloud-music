@@ -144,6 +144,13 @@
         inactive-text="音乐栏"
         inactive-color="#DCDFE6">
       </el-switch>
+       <!-- <el-switch
+        v-model="musicvalue"
+        @change="musicChange(musicvalue)"
+        active-color="#13ce66"
+        inactive-text="mini音乐栏"
+        inactive-color="#DCDFE6">
+      </el-switch> -->
     </div>
   </div>
 </template>
@@ -216,11 +223,14 @@ export default {
 .HomeHeader
   display flex
   align-items  center
+  min-height 60px
+  max-height 60px
   .left_
-    line-height 40px
+    // line-height 40px
     float left
     overflow hidden
-    width 58%
+    min-width 58%
+    max-height 60px
     .history_select
       position relative
       top -10px
@@ -263,7 +273,8 @@ export default {
     float right
     width 40%
     //margin 20px
-    line-height 40px
+    // line-height 40px
+    max-height 60px
     font-size 20px
     cursor pointer
     .el-switch

@@ -10,12 +10,13 @@
         </div>
         <!-- 用户信息区域 -->
         <div class="userinfo">
-          <img v-lazy="songDetailList.creator.avatarUrl" alt="">
-          <img
-            class="mini_icon"
+          <img class="iconHead" v-lazy="songDetailList.creator.avatarUrl" alt="">
+          <span class="mini_icon">
+            <img
             v-if="songDetailList.creator.avatarDetail !== null"
             v-lazy="songDetailList.creator.avatarDetail.identityIconUrl"
             alt="">
+          </span>
           <span :style="{color: '#507DAF'}">{{ songDetailList.creator.nickname }}</span>
           <span>{{ songDetailList.createTime | dateShow }} 创建</span>
         </div>
@@ -124,17 +125,21 @@ export default {
      **/
       .userinfo {
         margin: 10px 0;
-        img {
+        &>img {
           width: 40px;
           height: 40px;
           border-radius: 50%;
           vertical-align: middle;
         }
         .mini_icon {
-          width: 15px;
-          vertical-align: bottom;
-          margin-left: -15px;
+          img {
+            width: 15px!important;
+            height: 15px!important;
+            vertical-align: bottom;
+            margin-left: -15px;
+          }
         }
+
         span  {
           font-size: 15px;
           margin: 0 5px

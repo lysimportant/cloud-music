@@ -1,150 +1,154 @@
 <template>
-  <div
-    class="playmusic"
-    :class="{music_hide: !musicIsActive}" >
+  <div class="playmusic" :class="{ music_hide: !musicIsActive }">
     <aplayer
       ref="aplayer"
       :audio="audio"
       :lrcType="1"
       listFolded
       state
+      autoplay
       :volume="0.1"
     />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
-  name: 'PlayMusic',
+  name: "PlayMusic",
   computed: {
-    ...mapState(['musicData'])
+    ...mapState(["musicData"])
   },
-  data () {
+  data() {
     return {
       audio: [
         {
-          id: 718765, // 音频 id
-          name: "ブルーバード",
-          artist: "いきものがかり",
-          url: 'http://m8.music.126.net/20210718124701/5d613573e0723f8a1fb6755d6efcc546/ymusic/3mk-MDuhwmYYOfXtMoHIMw==/509951162913305678',
-          cover: "https://p1.music.126.net/FxdUoo1pt4x8tWx_1Xxo0Q==/109951165049992025.jpg", // prettier-ignore
-          lrc: `"[00:00.000] 作词 : Yoshiki Mizuno
-[00:00.200] 作曲 : Yoshiki Mizuno
-[00:00.400]飛翔いたら戻らないと言って
-[00:07.130]目指したのは 蒼い 蒼い あの空
-[00:14.150]
-[00:25.990]“悲しみ”はまだ覚えられず
-[00:29.170]“切なさ”は今つかみはじめた
-[00:32.390]あなたへと抱く この感情も
-[00:35.450]今“言葉”に変わっていく
-[00:38.720]未知なる世界の 遊迷(ゆめ)から目覚めて
-[00:44.970]この羽根を広げ 飛び立つ
-[00:51.200]飛翔(はばた)いたら 戻らないと言って
-[00:57.570]目指したのは 白い 白い あの雲
-[01:03.880]突き抜けたら みつかると知って
-[01:10.390]振り切るほど 蒼い 蒼い あの空
-[01:16.580]蒼い 蒼い あの空
-[01:19.670]蒼い 蒼い あの空
-[01:23.570]
-[01:29.090]愛想尽きたような音で
-[01:32.320]錆びれた古い窓は壊れた
-[01:35.440]見飽きたカゴは ほら捨てていく
-[01:38.640]振り返ることはもうない
-[01:41.800]高鳴る鼓動に 呼吸を共鳴(あず)けて
-[01:48.170]この窓を蹴って 飛び立つ
-[01:54.480]駆け出したら 手にできると言って
-[02:00.780]いざなうのは 遠い 遠い あの声
-[02:07.050]眩しすぎた あなたの手も握って
-[02:13.340]求めるほど 蒼い 蒼い あの空
-[02:26.640]
-[02:32.870]墜ちていくと わかっていた
-[02:39.070]それでも 光を追い続けていくよ
-[02:46.580]飛翔(はばた)いたら 戻らないと言って
-[02:52.890]探したのは 白い 白い あの雲
-[02:59.150]突き抜けたら みつかると知って
-[03:05.490]振り切るほど 蒼い 蒼い あの空
-[03:11.790]蒼い 蒼い あの空
-[03:14.950]蒼い 蒼い あの空
-[03:19.670]
-"`
-        },{
-          id: 1345872140, // 音频 id
-          name: '勾指起誓',
-          artist: '洛天依',
-          url: "http://m8.music.126.net/20210718124223/838e5b507ce1f7841406f650ff052d8a/ymusic/530b/5258/510b/da15b32b47e2d30c43cafa3bc328279c.mp3",
-          cover: 'https://p1.music.126.net/eMyCr0gv0kPGlew9XTNjyA==/109951163944178164.jpg', // prettier-ignore
-          lrc: `"[00:00.000] 作词 : ilem
-[00:01.000] 作曲 : ilem
-[00:03.578]编曲：ilem
-[00:07.453]
-[00:22.067]你是信的开头诗的内容
-[00:25.001]童话的结尾
-[00:27.190]你是理所当然的奇迹
-[00:30.390]你是月色真美
-[00:32.729]你是圣诞老人送给我
-[00:36.230]好孩子的礼物
-[00:38.588]你是三千美丽世界里
-[00:41.711]我的一瓢水
-[00:43.731]所以让我再靠近一点点
-[00:47.278]因为你太温暖
-[00:49.711]我会再变得坚强一点点
-[00:53.005]因为你太柔软
-[00:55.326]交换无名指金色的契约
-[00:58.582]给彼此岁月
-[01:01.127]说好从今以后都牵着手
-[01:04.164]因为要走很远
-[01:19.467]
-[01:30.083]你是我万水千山的冒险
-[01:33.017]要找的标记点
-[01:35.121]你是分割我人生的线
-[01:38.393]又将它们相连
-[01:40.677]你是前世千次的回眸
-[01:44.083]虔诚牵的手
-[01:46.103]你是其余所有的一切
-[01:49.364]是我的世界
-[01:51.838]所以请你再闪亮一点点
-[01:55.131]尽管我太平凡
-[01:57.396]我会再变得柔软一点点
-[02:01.216]因为你太敏感
-[02:03.123]交换无名指金色的契约
-[02:06.358]给彼此岁月
-[02:08.754]说好从今以后都牵着手
-[02:12.026]不管要走多远
-[02:14.432]
-[02:37.560]让我再靠近一点点
-[02:40.313]因为你太温暖
-[02:42.519]我会再变得坚强一点点
-[02:45.986]因为你太柔软
-[02:48.375]交换无名指金色的契约
-[02:51.518]给彼此岁月
-[02:54.054]说好从今以后都牵着手
-[02:57.278]因为要走很远
-[02:59.942]
-[03:00.506]混音：Tolein
-"`
-        }
-      ],
+          id: 37860126, // 音频 id
+          name: "Lemon（翻自 米津玄師） ",
+          artist: "Lemon",
+          url: require("../../assets/mp3/Akie秋绘 - Lemon（翻自 米津玄師）.mp3"),
+          cover:
+            "https://p1.music.126.net/EEKfs6vrZFaY_owE2fgRwA==/109951163175701373.jpg",
+          lrc: `"[00:00.000] 作词 : 米津玄師
+[00:01.000] 作曲 : 米津玄師
+[00:02.53]夢ならばどれほどよかったでしょう
+[00:08.67]未だにあなたのことを夢にみる
+[00:14.96]忘れた物を取りに帰るように
+[00:21.10]古びた思い出の埃を払う
+[00:28.99]戻らない幸せがあることを
+[00:34.97]最後にあなたが教えてくれた
+[00:40.79]言えずに隠してた昏い過去も
+[00:47.22]あなたがいなきゃ永遠に昏いまま
+[00:55.52]きっともうこれ以上　傷つくことなど
+[01:01.48]ありはしないとわかっている
+[01:06.82]あの日の悲しみさえ
+[01:09.76]あの日の苦しみさえ
+[01:12.93]そのすべてを愛してた　あなたとともに
+[01:19.20]胸に残り離れない
+[01:22.46]苦いレモンの匂い
+[01:25.76]雨が降り止むまでは帰れない
+[01:31.75]今でもあなたはわたしの光
+[02:02.19]あの日の悲しみさえ
+[02:05.28]あの日の苦しみさえ
+[02:08.28]そのすべてを愛してた　あなたとともに
+[02:14.58]胸に残り離れない
+[02:17.94]苦いレモンの匂い
+[02:21.50]雨が降り止むまでは帰れない
+[02:27.23]切り分けた果実の片方の様に
+[02:33.32]今でもあなたはわたしの光
+"`},{
+          id: 75528003, // 音频 id
+          name: "绿色",
+          artist: "陈雪凝",
+          url: require("../../assets/mp3/陈雪凝 - 绿色.mp3"),
+          cover: "https://p1.music.126.net/R4ZP3AJ9xV0vvw8LX7AbMA==/109951163860425334.jpg", // prettier-ignore
+          lrc: `"[00:00.000] 作词 : 陈雪凝 作曲 : 陈雪凝 编曲：Dadz
+[00:00.880]若不是你突然闯进我生活
+[00:04.370]我怎会把死守的寂寞放任了
+[00:25.850]说不痛苦那是假的
+[00:29.320]毕竟我的心也是肉做的
+[00:33.700]你离开时我心里的彩虹
+[00:37.600]就变成灰色
+[00:41.570]说不心酸那是假的
+[00:45.020]如果我真的没那么爱过
+[00:48.940]爱着一个没有灵魂的人
+[00:52.430]世界都是黑色
+[00:56.670]若不是你突然闯进 我生活
+[01:00.520]我怎会把死守的寂寞 放任了
+[01:04.459]爱我的话你都说
+[01:06.459]爱我的事你不做
+[01:08.469]我却把甜言蜜语当做你爱我的躯壳
+[01:12.890]你的悲伤难过我不参破
+[01:16.310]我也会把曾经的且过 当施舍
+[01:20.250]不去计较你太多
+[01:22.250]从此你在我心里
+[01:23.890]只剩绿色
+[01:44.480]说很快活那是假的
+[01:47.989]你的名字依然那么深刻
+[01:51.940]每个字都刺穿我的心脏
+[01:55.739]那鲜明的痛是红色
+[01:59.569]若不是你突然闯进 我生活
+[02:03.510]我怎会把死守的寂寞 放任了
+[02:07.400]爱我的话你都说
+[02:09.439]爱我的事你不做
+[02:11.400]我却把甜言蜜语当做你爱我的躯壳
+[02:15.770]你的悲伤难过我不参破
+[02:19.199]我也会把曾经的且过 当施舍
+[02:23.210]不去计较你太多
+[02:25.129]从此你在我心里
+[02:26.810]只剩绿色
+[02:31.830]呼～
+[03:33.979]若不是你突然闯进 我生活
+[03:37.879]我怎会把死守的寂寞 放任了
+[03:41.789]爱我的话你都说
+[03:43.830]爱我的事你不做
+[03:45.800]我却把甜言蜜语当做你爱我的躯壳
+[03:50.330]若不是你突然闯进 我生活
+[03:53.660]我怎会把死守的寂寞 放任了
+[03:57.569]爱我的话你都说
+[03:59.580]爱我的事你不做
+[04:01.599]我却把甜言蜜语当做你爱我的躯壳
+[04:05.990]你的悲伤难过我不参破
+[04:09.430]我也会把曾经的且过 当施舍
+[04:13.349]若不是你突然闯进 我生活
+[04:17.319]我怎会把死守的寂寞 放任了
+[04:21.199]爱我的话你都说
+[04:23.230]爱我的事你不做
+[04:25.250]我却把甜言蜜语当做你爱我的躯壳
+[04:31.290]和声：李美灵芝
+[04:32.810]混音：一曲不空
+[04:34.040]发行：3SEVEN叁七
+"`}],
       musicIsActive: true
-    }
+    };
   },
-  mounted () {
-    this.initCreateElement()
-    this.$bus.$on('musicChange', val => {
-      console.log(val)
-      this.musicIsActive = val
-    })
+  mounted() {
+    this.initCreateElement();
+    this.$bus.$on("musicChange", val => {
+      console.log(val);
+      this.musicIsActive = val;
+    });
   },
   methods: {
-    getMusicValue (n) {
-      const music = {}
-      music.id = n.info.id + new Date()
-      music.url = n.url
-      music.artist = n.info.ar[0].name
-      music.name = n.info.name
-      music.cover = n.info.al.picUrl
-      music.lrc = n.lyric
-      this.audio.push(music)
+    getMusicValue(n) {
+      const music = {};
+      music.id = n.info.id;
+      music.url = n.url;
+      music.artist = n.info.ar[0].name;
+      music.name = n.info.name;
+      music.cover = n.info.al.picUrl;
+      music.lrc = n.lyric;
+      // 过滤
+      let obj = this.audio.find(item => item.id == music.id);
+      if (obj) {
+        return this.close(n.info.name);
+      }
+      this.audio.unshift(music);
+      this.open(n.info.name);
+      this.$refs.aplayer.switch(0)
+      setTimeout(() => {
+        this.$refs.aplayer.play()
+      }, 300)
       /*       this.audio.id = n.info.id;
       this.audio.url = n.url;
       this.audio.artist = n.info.ar[0].name;
@@ -152,100 +156,106 @@ export default {
       this.audio.cover = n.info.al.picUrl;
       this.audio.lrc = n.lyric; */
     },
-    initCreateElement () {
-      const parent = document.querySelector('.aplayer-time')
+    initCreateElement() {
+      const parent = document.querySelector(".aplayer-time");
       // 创建清空列表按钮
-      const clearSpan = document.createElement('i')
-      clearSpan.title = '清空播放列表'
-      clearSpan.className = 'clearMusic iconfont icon-lajitong'
-      parent.appendChild(clearSpan)
-      clearSpan.addEventListener('click', this.clearMusic)
+      const clearSpan = document.createElement("i");
+      clearSpan.title = "清空播放列表";
+      clearSpan.className = "clearMusic iconfont icon-lajitong";
+      parent.appendChild(clearSpan);
+      clearSpan.addEventListener("click", this.clearMusic);
       // 上一首
-      const BackEL = document.createElement('i')
-      BackEL.title = '播放上一首'
-      BackEL.className = 'backMusic iconfont icon-youqianjin'
-      parent.appendChild(BackEL)
-      BackEL.addEventListener('click', this.backMusic)
+      const BackEL = document.createElement("i");
+      BackEL.title = "播放上一首";
+      BackEL.className = "backMusic iconfont icon-youqianjin";
+      parent.appendChild(BackEL);
+      BackEL.addEventListener("click", this.backMusic);
       // 暂停
-      const StopEL = document.createElement('i')
-      StopEL.title = '播放/暂停音乐'
-      StopEL.className = 'stopMusic icon-bofang iconfont'
-      parent.appendChild(StopEL)
-      StopEL.addEventListener('click', this.StopMusic)
+      const StopEL = document.createElement("i");
+      StopEL.title = "播放/暂停音乐";
+      StopEL.className = "stopMusic icon-bofang iconfont";
+      parent.appendChild(StopEL);
+      StopEL.addEventListener("click", this.StopMusic);
       // 播放下一首
-      const NextEL = document.createElement('i')
-      NextEL.title = '播放下一首'
-      NextEL.className = 'nextMusic icon-zuoqianjin iconfont'
-      parent.appendChild(NextEL)
-      NextEL.addEventListener('click', this.NextMusic)
+      const NextEL = document.createElement("i");
+      NextEL.title = "播放下一首";
+      NextEL.className = "nextMusic icon-zuoqianjin iconfont";
+      parent.appendChild(NextEL);
+      NextEL.addEventListener("click", this.NextMusic);
       // 显示/隐藏歌词
-      const SongEL = document.createElement('i')
-      SongEL.title = '显示/隐藏歌词'
-      SongEL.className = 'songMusic icon-geci iconfont'
-      parent.appendChild(SongEL)
-      SongEL.addEventListener('click', this.SongMusic)
+      const SongEL = document.createElement("i");
+      SongEL.title = "显示/隐藏歌词";
+      SongEL.className = "songMusic icon-geci iconfont";
+      parent.appendChild(SongEL);
+      SongEL.addEventListener("click", this.SongMusic);
       // 鼠标放置显示文字提示
-      const volume = document.querySelector('.aplayer-volume-wrap')
-      volume.title = '音乐播放音量'
-      const order = document.querySelector('.aplayer-icon-order')
-      order.title = '播放顺序：列表或随机'
-      const loop = document.querySelector('.aplayer-icon-loop')
-      loop.title = '循环设置：列表循环、单曲循环、禁止循环'
-      const menu = document.querySelector('.aplayer-icon-menu')
-      menu.title = '播放列表显示'
+      const volume = document.querySelector(".aplayer-volume-wrap");
+      volume.title = "音乐播放音量";
+      const order = document.querySelector(".aplayer-icon-order");
+      order.title = "播放顺序：列表或随机";
+      const loop = document.querySelector(".aplayer-icon-loop");
+      loop.title = "循环设置：列表循环、单曲循环、禁止循环";
+      const menu = document.querySelector(".aplayer-icon-menu");
+      menu.title = "播放列表显示";
     },
-    SongMusic () {
-      console.log('显示/隐藏歌词')
-      this.$refs.aplayer.toggleLrc()
+    SongMusic() {
+      console.log("显示/隐藏歌词");
+      this.$refs.aplayer.toggleLrc();
     },
     // 播放下一首
-    NextMusic () {
-      console.log('播放下一首')
-      this.$refs.aplayer.skipForward()
+    NextMusic() {
+      console.log("播放下一首");
+      this.$refs.aplayer.skipForward();
     },
     // 清空播放列表
-    clearMusic () {
-      console.log('清空播放列表')
+    clearMusic() {
+      console.log("清空播放列表");
       if (this.audio.length > 0) {
-        this.audio = []
-        this.$refs.aplayer.pause()
-        return this.$message.success('列表清空成功!')
+        this.audio = [];
+        this.$refs.aplayer.pause();
+        return this.$message.success("列表清空成功!");
       } else {
-        return this.$message.error('列表已经清空!')
+        return this.$message.error("列表已经清空!");
       }
     },
     // 播放上一首
-    backMusic () {
-      console.log('播放上一首')
-      this.$refs.aplayer.skipBack()
+    backMusic() {
+      console.log("播放上一首");
+      this.$refs.aplayer.skipBack();
     },
     // 停止播放
-    StopMusic () {
-      console.log('播放/暂停音乐')
-      this.$refs.aplayer.toggle()
+    StopMusic() {
+      console.log("播放/暂停音乐");
+      this.$refs.aplayer.toggle();
     },
-    open (name) {
+    open(name) {
+      this.$notify({
+        title: `歌曲: ${name}`,
+        type: "success",
+        dangerouslyUseHTMLString: true,
+        message: "<strong>以添加到播放到列表且播放</strong>",
+        offset: 100
+      });
+    },
+    close(name) {
       this.$notify({
         title: `${name}`,
-        type: 'success',
+        type: "error",
         dangerouslyUseHTMLString: true,
-        message: '<strong>以添加到播放到列表</strong>',
+        message: "<strong>歌曲已在播放列表中</strong>",
         offset: 100
-      })
+      });
     }
-
   },
   watch: {
     musicData: {
-      handler (n, o) {
-        this.getMusicValue(n)
-        this.open(n.info.name)
-        console.log(n)
+      handler(n, o) {
+        this.getMusicValue(n);
       },
       deep: true
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">
@@ -254,9 +264,9 @@ export default {
   width: 100%;
   bottom: -5px;
   z-index: 9;
-  transition: all .3s;
+  transition: all 0.3s;
   .aplayer {
-    transition: all .3s;
+    transition: all 0.3s;
     width: 100%;
     // z-index: 999999;
   }

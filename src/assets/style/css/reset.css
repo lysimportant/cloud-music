@@ -174,3 +174,6 @@ a {
   bottom: 5px!important;
   width: 99% !important;
 }
+.aplayer-volume {
+  background-color: rgb(255, 0, 0) !important;
+}

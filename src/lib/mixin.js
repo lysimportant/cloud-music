@@ -35,6 +35,15 @@ export default {
     /** @音乐播放 **/
     async playMusic (item) {
       this.$store.dispatch('getAudioInfo', item)
+    },
+    Saveing(name, load) {
+      this.$notify({
+        title: `${name}`,
+        type: "success",
+        dangerouslyUseHTMLString: true,
+        message: `<strong>正在${load},请稍等~~</strong>`,
+        offset: 100
+      });
     }
   }
 }
