@@ -27,8 +27,10 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
-  Switch
+  Switch,
+  Popover
 } from 'element-ui'
+Vue.use(Popover)
 Vue.use(Switch)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)

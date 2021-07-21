@@ -56,7 +56,7 @@ a {
 html, body, #app {
   width: 100%;
   height: 100%;
-  min-width: 95%;
+  min-width: 1500px;
 }
 .el-carousel__indicators--outside {
   position: absolute;
@@ -122,6 +122,7 @@ a {
 .el-aside {
   width: 0px;
 }
+
 .clearMusic,
 .backMusic,
 .stopMusic,
@@ -140,6 +141,7 @@ a {
   right: 80px;
   color: #000;
 }
+
 .stopMusic {
   right: 58px;
   bottom: 36px;
@@ -176,4 +178,19 @@ a {
 }
 .aplayer-volume {
   background-color: rgb(255, 0, 0) !important;
+}
+.aplayer-lrc-current {
+  font-size: 18px!important;
+  height: 18px!important;
+  color: #517EAF!important;
+}
+.clearfix:before,.clearfix:after {
+  content :"";
+  display:table;/*转换成表格*/
+}
+.clearfix:after {
+  clear:both;
+}
+.clearfix {
+  *zoom: 1;
 }

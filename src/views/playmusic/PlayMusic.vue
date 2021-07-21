@@ -5,9 +5,11 @@
       :audio="audio"
       :lrcType="1"
       listFolded
+      :fixed="minValue"
+      :mini="minValue"
       state
       autoplay
-      :volume="0.1"
+      :volume="0.15"
     />
   </div>
 </template>
@@ -119,15 +121,19 @@ export default {
 [04:32.810]混音：一曲不空
 [04:34.040]发行：3SEVEN叁七
 "`}],
-      musicIsActive: true
+      musicIsActive: true,
+      minValue: false
     };
   },
   mounted() {
-    this.initCreateElement();
     this.$bus.$on("musicChange", val => {
-      console.log(val);
       this.musicIsActive = val;
-    });
+    })
+    this.$bus.$on('miniChange', val => {
+      this.minValue = val
+      val ? this.deleteElement() : this.initCreateElement()
+    })
+    this.initCreateElement()
   },
   methods: {
     getMusicValue(n) {
@@ -139,7 +145,7 @@ export default {
       music.cover = n.info.al.picUrl;
       music.lrc = n.lyric;
       // 过滤
-      let obj = this.audio.find(item => item.id == music.id);
+      let obj = this.audio.find(item => item.id === music.id);
       if (obj) {
         return this.close(n.info.name);
       }
@@ -156,47 +162,59 @@ export default {
       this.audio.cover = n.info.al.picUrl;
       this.audio.lrc = n.lyric; */
     },
+    deleteElement () {
+      const q = document.querySelector(".clearMusic");
+      const w = document.querySelector(".backMusic");
+      const e = document.querySelector(".stopMusic");
+      const r = document.querySelector(".nextMusic");
+      const t = document.querySelector(".songMusic");
+      q.remove()
+      w.remove()
+      e.remove()
+      r.remove()
+      t.remove()
+    },
     initCreateElement() {
-      const parent = document.querySelector(".aplayer-time");
-      // 创建清空列表按钮
-      const clearSpan = document.createElement("i");
-      clearSpan.title = "清空播放列表";
-      clearSpan.className = "clearMusic iconfont icon-lajitong";
-      parent.appendChild(clearSpan);
-      clearSpan.addEventListener("click", this.clearMusic);
-      // 上一首
-      const BackEL = document.createElement("i");
-      BackEL.title = "播放上一首";
-      BackEL.className = "backMusic iconfont icon-youqianjin";
-      parent.appendChild(BackEL);
-      BackEL.addEventListener("click", this.backMusic);
-      // 暂停
-      const StopEL = document.createElement("i");
-      StopEL.title = "播放/暂停音乐";
-      StopEL.className = "stopMusic icon-bofang iconfont";
-      parent.appendChild(StopEL);
-      StopEL.addEventListener("click", this.StopMusic);
-      // 播放下一首
-      const NextEL = document.createElement("i");
-      NextEL.title = "播放下一首";
-      NextEL.className = "nextMusic icon-zuoqianjin iconfont";
-      parent.appendChild(NextEL);
-      NextEL.addEventListener("click", this.NextMusic);
-      // 显示/隐藏歌词
-      const SongEL = document.createElement("i");
-      SongEL.title = "显示/隐藏歌词";
-      SongEL.className = "songMusic icon-geci iconfont";
-      parent.appendChild(SongEL);
-      SongEL.addEventListener("click", this.SongMusic);
-      // 鼠标放置显示文字提示
-      const volume = document.querySelector(".aplayer-volume-wrap");
-      volume.title = "音乐播放音量";
-      const order = document.querySelector(".aplayer-icon-order");
-      order.title = "播放顺序：列表或随机";
-      const loop = document.querySelector(".aplayer-icon-loop");
-      loop.title = "循环设置：列表循环、单曲循环、禁止循环";
-      const menu = document.querySelector(".aplayer-icon-menu");
-      menu.title = "播放列表显示";
+        const parent = document.querySelector(".aplayer-time");
+        const clearSpan = document.createElement("i");
+        const BackEL = document.createElement("i");
+        const StopEL = document.createElement("i");
+        const NextEL = document.createElement("i");
+        const SongEL = document.createElement("i");
+        // 创建清空列表按钮
+        clearSpan.title = "清空播放列表";
+        clearSpan.className = "clearMusic iconfont icon-lajitong";
+        parent.appendChild(clearSpan);
+        clearSpan.addEventListener("click", this.clearMusic);
+        // 上一首
+        BackEL.title = "播放上一首";
+        BackEL.className = "backMusic iconfont icon-youqianjin";
+        parent.appendChild(BackEL);
+        BackEL.addEventListener("click", this.backMusic);
+        // 暂停
+        StopEL.title = "播放/暂停音乐";
+        StopEL.className = "stopMusic icon-bofang iconfont";
+        parent.appendChild(StopEL);
+        StopEL.addEventListener("click", this.StopMusic);
+        // 播放下一首
+        NextEL.title = "播放下一首";
+        NextEL.className = "nextMusic icon-zuoqianjin iconfont";
+        parent.appendChild(NextEL);
+        NextEL.addEventListener("click", this.NextMusic);
+        // 显示/隐藏歌词
+        SongEL.title = "显示/隐藏歌词";
+        SongEL.className = "songMusic icon-geci iconfont";
+        parent.appendChild(SongEL);
+        SongEL.addEventListener("click", this.SongMusic);
+        // 鼠标放置显示文字提示
+        const volume = document.querySelector(".aplayer-volume-wrap");
+        volume.title = "音乐播放音量";
+        const order = document.querySelector(".aplayer-icon-order");
+        order.title = "播放顺序：列表或随机";
+        const loop = document.querySelector(".aplayer-icon-loop");
+        loop.title = "循环设置：列表循环、单曲循环、禁止循环";
+        const menu = document.querySelector(".aplayer-icon-menu");
+        menu.title = "播放列表显示";
     },
     SongMusic() {
       console.log("显示/隐藏歌词");
@@ -268,7 +286,7 @@ export default {
   .aplayer {
     transition: all 0.3s;
     width: 100%;
-    // z-index: 999999;
+     //z-index: 999999;
   }
 }
 .music_hide {

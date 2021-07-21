@@ -7,7 +7,7 @@
 
     <div class="newSong">
       <div class="rsitem"
-           @click="$emit('playMusic', item)"
+           @click=playMusic(item)
            v-for="(item, index) in newSongs"
            :key="item.id"
            @mousemove="isShow = index"
@@ -43,7 +43,7 @@ export default {
 
 <style scpoed lang="less">
 h3 {
-  margin: 0 0 10px 30px;
+  margin: 0 0 10px 15px;
   font-size: 20px;
   cursor: pointer;
 }
@@ -56,7 +56,7 @@ h3 {
 
 }
 .rsitem {
-  width: 45%;
+  width: 30%;
   margin: 10px 20px 10px 30px;
   position: relative;
   overflow: hidden;

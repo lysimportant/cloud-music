@@ -2,7 +2,7 @@
   <div>
     <h1>
       <router-link to="/home/mv">
-        推荐视频 <i class="iconfont icon-jiantou1"></i>
+        {{ str }} <i class="iconfont icon-jiantou1"></i>
       </router-link>
     </h1>
     <div class="mv">
@@ -19,8 +19,15 @@
               v-show="MvMouseMove !==  index"
               :class="{ songs_top_bottom: MvMouseMove === index }"
         >
-          <i class="icon-caret-right iconfont"></i>
-          {{ item.playCount }}
+
+        <span v-if="item.playCount">
+            <i class="icon-caret-right iconfont"></i>
+          {{ item.playCount | ellipsisPlayVolume }}
+        </span>
+
+        <span v-else>
+          <i class="el-icon-video-play"></i>
+        </span>
         </span>
         <!-- 遮罩文字 -->
         <span class="write"
@@ -46,7 +53,8 @@ export default {
       default () {
         return []
       }
-    }
+    },
+    str: String
   },
   data () {
     return {
@@ -69,8 +77,11 @@ export default {
 .songs_top_bottom {
   animation: songs_top_bottom .5s linear forwards;
 }
+.el-icon-video-play {
+  font-size: 30px;
+}
 h1 {
-  margin: 10px 0 10px 25px;
+  margin: 10px 0 10px 15px;
   font-size: 20px;
 }
 .mv {
@@ -84,12 +95,12 @@ h1 {
   .mv_item {
     position: relative;
     overflow: hidden;
-    width: 23%;
-    margin-bottom: 100px;
+    width: 30%;
+    margin-bottom: 20px;
 
     img {
       width: 100%;
-      height: 300px;
+      height: 250px;
       border-radius: 10px;
     }
     .playCount {

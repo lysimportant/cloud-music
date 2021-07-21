@@ -1,6 +1,21 @@
 <template>
   <div class="playre">
   <div class="tar">
+    <el-popover
+      placement="bottom"
+      trigger="hover">
+      <el-button slot="reference">全部歌单 <i class="iconfont icon-jiantou1"></i></el-button>
+        <ul class="classification" v-for="(items, index) in classification">
+          <li class="li_" v-for="(item, index) in items">
+            <span
+              :class="[{ [item.icon]: index < 1 }, {iconfont : index < 1}]"
+              @click="tarBarClick(item.name)">
+              {{ item.name }}
+            </span>
+          </li>
+        </ul>
+    </el-popover>
+
         <ul class="tab-bar">
           <li class="item"
               :class="{item_active: songPlayList.cat === item}"
@@ -38,7 +53,7 @@
         @current-change="handleCurrentChange"
         background
         :current-page="songPlayList.num"
-        :page-sizes="[10, 15, 20, 30]"
+        :page-sizes="[10, 15, 30, 100]"
         :page-size="songPlayList.size"
         layout="total, sizes, prev, pager, next, jumper"
         :total="songPlayList.total"
@@ -48,12 +63,15 @@
 </template>
 
 <script>
-import { reqRecommendPlayList } from '@/api/songPlayList'
+import {
+  reqRecommendPlayList,
+  reqPlayTag
+} from '@/api/songPlayList'
 export default {
   name: 'PlayRecommend',
   data () {
     return {
-      TabBar: ['全部', '欧美', '华语', '流行', '说唱', '摇滚', '民谣', '电子', '轻音乐', '影视原声', 'ACG', '怀旧'],
+      TabBar: ['全部', '粤语', 'ACG', '华语', '流行', '欧美', '说唱', '摇滚', '民谣', '电子', '轻音乐', '影视原声', '怀旧'],
       PlayMove: '',
       list: [], /** @歌单数据 **/
       songPlayList: {
@@ -62,11 +80,40 @@ export default {
         cat: '全部', /** @显示的类型 **/
         size: 10, /** @当前页显示的数据 **/
         offset: 0 /** @分页数据的显示 **/
+      },
+      classification: {
+        language: [],
+        style: [],
+        scenes: [],
+        emotion: [],
+        theme: []
       }
     }
   },
-  created () {
+  async created () {
     this.getPlayList()
+    const { data: res } = await reqPlayTag()
+    res.sub.find(item => {
+      if ( item.category === 0 ) {
+        this.classification.language.push(item)
+      } else if ( item.category === 1 ) {
+        this.classification.style.push(item)
+
+      } else if ( item.category === 2 ) {
+        this.classification.scenes.push(item)
+      } else if ( item.category === 3 ) {
+        this.classification.emotion.push(item)
+      } else if ( item.category === 4 ) {
+        this.classification.theme.push(item)
+      }
+    })
+    this.classification.language.unshift({name: '语言', icon: 'icon-diqiu'})
+    this.classification.style.unshift({name: '风格', icon: 'icon-fengge'})
+    this.classification.scenes.unshift({name: '场景', icon: 'icon-kafei'})
+    this.classification.emotion.unshift({name: '情感', icon: 'icon-smile'})
+    this.classification.theme.unshift({name: '主题', icon: 'icon-zhuti'})
+    console.log(this.classification.style)
+    console.log(this.classification)
   },
   methods: {
     tarBarClick (item) {
@@ -105,7 +152,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .tar {
   width: 100%;
   height: 40px;
@@ -163,6 +210,32 @@ export default {
 }
 .el-pagination {
   position: relative;
-  top: -100px;
+  top: -115px;
+}
+.li_ {
+  display: inline-block;
+  margin: 5px 5px;
+}
+
+.li_:nth-child(n+2) {
+  margin: 20px 10px;
+  &:hover {
+    color: #FF0000;
+  }
+  span {
+    border: 1px solid #cccccc;
+    padding: 5px;
+    margin: 5px 0;
+  }
+
+}
+.classification {
+  width: 800px;
+}
+.el-button {
+  margin: 10px 15px;
+}
+.icon-jiantou1 {
+  font-size: 12px;
 }
 </style>

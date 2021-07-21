@@ -58,6 +58,8 @@ export default {
   background-color: rgba(249, 249, 249, .5);
   box-shadow: 0 1px 1px red;
   padding: 0;
+  max-height: 50px;
+  min-height: 48px;
   margin-bottom: 2px;
 }
 .el-aside {

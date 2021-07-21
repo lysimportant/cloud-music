@@ -2,8 +2,10 @@
   <div class='individuation'>
     <individuation-swiper :banners='banners' />
     <recommend-song :recommend-songs="recommendSongs"></recommend-song>
-    <new-song @playMusic="playMusic" :new-songs="newSongs"/>
-    <mv :mv="mv"/>
+    <mv :str="'独家放松'" :mv="privateContent"/>
+    <new-song :new-songs="newSongs"/>
+    <mv :str="'推荐MV'" :mv="mv"/>
+    <div class="box"></div>
   </div>
 </template>
 
@@ -12,7 +14,9 @@ import {
   reqBannerData,
   reqRecommend,
   reqNewRecommend,
-  reqMvRecommend
+  reqMvRecommend,
+  reqRecommendList,
+  reqPrivatecontent
 } from '@/api/discover'
 import individuationSwiper from './children/individuationSwiper'
 import recommendSong from '@/components/content/recommendSong'
@@ -33,7 +37,8 @@ export default {
       banners: [],
       recommendSongs: [],
       newSongs: [],
-      mv: []
+      mv: [],
+      privateContent: []
     }
   },
   async created () {
@@ -41,12 +46,15 @@ export default {
     const { data: response } = await reqRecommend()
     const { data: newSong } = await reqNewRecommend()
     const { data: mv } = await reqMvRecommend()
-    this.recommendSongs = response.result
+    // const { data: reList } = await reqRecommendList() // 请求出错
+    const { data: privateContent } = await reqPrivatecontent()
     this.banners = res.banners
-    this.newSongs = newSong.result
-    this.mv = mv.result
+    this.recommendSongs = response.result
+    this.newSongs = newSong.result.slice(0,9)
+    this.mv = mv.result.slice(0, 3)
+    // this.recommendSongs.unshift(reList.recommend[0])
+    this.privateContent = privateContent.result
     if (res.code !== 200) return this.$message.error('获取数据失败!')
-    // console.log(this.recommendSongs, 'individuation')
   }
 }
 </script>
@@ -57,9 +65,8 @@ export default {
   height: 100%;
 }
 .box {
-  width: 500px;
-  height: 500px;
-  margin: 200px;
-  background-color: #021611;
+  width: 100px;
+  height: 100px;
+  margin: 0  200px;
 }
 </style>

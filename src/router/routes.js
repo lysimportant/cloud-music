@@ -44,6 +44,12 @@ export default [
         name: 'search',
         meta: { noTopNav: true },
         component: () => import(/* WebpackChunkName: "search_index" */ '@/views/search/searchIndex')
+      },
+      {
+        path: '/home/leaderboard',
+        name: 'leaderboard',
+        meta: { noTopNav: true },
+        component: () => import(/* WebpackChunkName: "leaderboard_index" */ '@/views/leaderboard/LeaderBoard')
       }
     ]
   },

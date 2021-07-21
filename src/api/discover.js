@@ -11,12 +11,35 @@ export const reqRecommend = () => {
     url: '/personalized?limit=10'
   })
 }
+/**
+ * @获取每日推荐歌单
+ * **/
+export const reqRecommendList = () => {
+  return ajax({
+    url: '/recommend/resource'
+  })
+}
+/**
+ * @获取每日推荐歌曲
+ * **/
+export const reqRecommendSongs = () => {
+  return ajax({
+    url: '/recommend/songs'
+  })
+}
 // 获取推荐新音乐
 export const reqNewRecommend = () => {
   return ajax({
     url: '/personalized/newsong'
   })
 }
+/** @独家放松  /personalized/privatecontent **/
+export const reqPrivatecontent = () => {
+  return ajax({
+    url: '/personalized/privatecontent'
+  })
+}
+
 // 获取推荐mv
 export const reqMvRecommend = () => {
   return ajax({

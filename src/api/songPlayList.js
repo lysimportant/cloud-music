@@ -1,6 +1,16 @@
 import { ajax } from '@/lib/ajax'
 /**
- * @获取精品歌单推荐
+ * @param /playlist/catlist 歌单标签列表
+ * **/
+export const reqPlayTag = () => {
+  return ajax({
+    url: '/playlist/catlist'
+  })
+}
+/**
+ * @param /top/playlist/highquality 获取精品歌单推荐
+ * @param cat 标签
+ * @param limit 获取数据的数量
  * **/
 export const reqTopPlayList = (cat = '全部', limit = 1) => {
   return ajax({
@@ -24,6 +34,8 @@ export const reqRecommendPlayList = (offset = 0, limit = 15, cat = '全部') => 
     }
   })
 }
+
+
 /**
  * @获取最新音乐 全部:0 华语:7 欧美:96 日本:8  韩国:16
  **/
@@ -59,5 +71,32 @@ export const reqSongSub = (id, limit) => {
       id,
       limit
     }
+  })
+}
+/**
+ * @排行榜摘要 /toplist/detail
+ * **/
+export const reqTopList = () => {
+  return ajax({
+    url: '/toplist'
+  })
+}
+
+/**
+ * @排行榜摘要 /toplist/detail
+ * **/
+export const reqTopListDetail = () => {
+  return ajax({
+    url: '/toplist/detail'
+  })
+}
+
+//
+/**
+ * @param 热门歌手榜 /toplist/artist
+ * **/
+export const reqTopSinger = () => {
+  return ajax({
+    url: '/toplist/artist'
   })
 }

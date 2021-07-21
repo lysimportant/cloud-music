@@ -6,10 +6,10 @@
       </router-link>
     </h1>
     <!-- 一个歌单 -->
+
     <div class="item"
          v-for="(item, index) in recommendSongs"
-         :key="item.id"
-
+         :key="index"
          @mouseleave="MouseMove = false"
          @mousemove="MouseMove =  index"
     >
@@ -29,7 +29,12 @@
       class="title playCount text_hidden"
       v-show="MouseMove !== index">
         <i class="el-icon-headset"></i>
-        {{ item.playCount | ellipsisPlayVolume }}
+        <span v-if="item.playCount">
+          {{ item.playCount | ellipsisPlayVolume }}
+        </span>
+        <span v-else>
+          {{ item.playcount | ellipsisPlayVolume }}
+        </span>
       </div>
       <!-- 图片 -->
       <img @click="itemClick(item)"
@@ -75,7 +80,7 @@ export default {
       console.log(val)
       this.getSongDetail(val)
       this.loadmusic()
-      this.Saveing('播放歌单音乐', '请求')
+      this.Saveing('播放歌单音乐', '如网速原因播放不了,需要再点一下,请稍候~~')
     },
     getSongDetail (id) {
       reqSongListDetail(id).then(res => {

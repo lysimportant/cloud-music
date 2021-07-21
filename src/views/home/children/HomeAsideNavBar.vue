@@ -36,7 +36,8 @@ export default {
         { menu: '个性推荐', path: '/home/individuation', icon: 'icon-airec-zhinengtuijian' },
         { menu: '歌单推荐', path: '/home/playlist',icon: 'icon-gedan' },
         { menu: '最新音乐', path: '/home/songs', icon: 'icon-yinyue'  },
-        { menu: '最新mv', path: '/home/mv', icon: 'icon-MV'  }
+        { menu: '最新mv', path: '/home/mv', icon: 'icon-MV'  },
+        { menu: '排行榜', path: '/home/leaderboard', icon: 'icon-paihang'  }
       ]
     }
   }
