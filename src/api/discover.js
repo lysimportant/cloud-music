@@ -81,3 +81,20 @@ export const reqMusicLyric = id => {
     url: `/lyric?id=${id}`
   })
 }
+
+/**
+ * @param  t: 0 删除, 1 发送, 2 回复 发送评论
+ * @param  0: 歌曲 1: mv   2: 歌单 3: 专辑   4: 电台   5: 视频 6: 动态|
+ * @param id: 对应资源 id - 用户
+ * @param content :要发送的内容
+ * @param commentId :回复的评论id (回复评论时必填)
+
+
+ * **/
+export const reqSendComment = params => {
+  return ajax({
+    method: 'GET',
+    url: '/comment',
+    params
+  })
+}

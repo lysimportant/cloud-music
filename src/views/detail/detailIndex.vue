@@ -42,11 +42,15 @@ export default {
     },
     loadmusic () {
       // 添加音乐
-      this.musicList.slice(0, 10).forEach(item => {
+      this.musicList.forEach(item => {
         this.playMusic(item)
-        console.log(item)
       })
     }
+  },
+  mounted () {
+    this.$bus.$on('newDetail', id => {
+      this.getSongDetail(id)
+    })
   },
   created () {
     this.getSongDetail()

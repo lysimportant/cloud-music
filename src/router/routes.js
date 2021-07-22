@@ -50,6 +50,23 @@ export default [
         name: 'leaderboard',
         meta: { noTopNav: true },
         component: () => import(/* WebpackChunkName: "leaderboard_index" */ '@/views/leaderboard/LeaderBoard')
+      },
+      {
+        path: '/home/singer',
+        name: 'singer',
+        meta: { noTopNav: true },
+        component: () => import(/* WebpackChunkName: "singer_index" */ '@/views/singer/singerIndex')
+      },
+      {
+        path: '/home/singerleaderboard',
+        name: 'singerleaderboard',
+        meta: { noTopNav: true },
+        component: () => import(/* WebpackChunkName: "singer_leaderboard" */ '@/views/singer/children/singerLeaderBoard')
+      },
+      {
+        path: '/home/singerdetail',
+        name: 'singerdetail',
+        component: () => import(/* WebpackChunkName: "singer_detail" */ '@/views/singer/children/singerDetail')
       }
     ]
   },

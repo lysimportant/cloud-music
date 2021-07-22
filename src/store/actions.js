@@ -8,7 +8,8 @@ import {
 
 import {
   reqPhoneLogin,
-  reqLoginState
+  reqLoginState,
+  reqUserPlayList
 } from '@/api/user'
 
 import {
@@ -21,9 +22,26 @@ import { reqMvDetail, reqMvDataDetail, reqMvSimi } from '@/api/reqMv'
 export default {
   // 获取用户登录信息
   async getUserInfo ({ commit }, payload) {
+    console.log('getUserInfo')
+    let obj = {}
+    let myList = []
+    let subList = []
     const { data: res } = await reqPhoneLogin(payload)
+    const { data: userList } = await reqUserPlayList(res.profile.userId)
+    userList.playlist.find(item => {
+      if (item.userId === res.profile.userId) {
+        myList.push(item)
+      } else {
+        subList.push(item)
+      }
+    })
+    obj.profile = res.profile
+    obj.myList = myList
+    obj.subList = subList
     window.sessionStorage.setItem('token', res.token)
-    commit(RECEIVE_USER_INFO, res.profile)
+    setTimeout(() => {
+      commit(RECEIVE_USER_INFO, obj)
+    }, 300)
   },
   async getUserData ({ commit }) {
     const { data: { data: res } } = await reqLoginState()

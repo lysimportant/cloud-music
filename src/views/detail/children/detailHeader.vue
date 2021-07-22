@@ -23,7 +23,7 @@
         <!-- 功能区域 -->
         <div class="features">
          <div class="play">
-          <span class="play_icon">
+          <span class="play_icon" @click="play_icon_music">
             <i class="el-icon-video-play"></i>
             播放全部
           </span>
@@ -68,8 +68,14 @@ export default {
     }
   },
   methods: {
+    // 1 添加到播放那个列表 2 播放全部
     loadmusic () {
       this.$emit('loadmusic')
+      this.$bus.$emit('later', true)
+    },
+    play_icon_music () {
+      this.$emit('loadmusic')
+      this.$bus.$emit('later', false)
     }
   },
   mounted () {

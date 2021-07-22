@@ -8,8 +8,7 @@
       :fixed="minValue"
       :mini="minValue"
       state
-      autoplay
-      :volume="0.15"
+      :volume=".5"
     />
   </div>
 </template>
@@ -122,7 +121,8 @@ export default {
 [04:34.040]发行：3SEVEN叁七
 "`}],
       musicIsActive: true,
-      minValue: false
+      minValue: false,
+      playPick: null
     };
   },
   mounted() {
@@ -132,6 +132,10 @@ export default {
     this.$bus.$on('miniChange', val => {
       this.minValue = val
       val ? this.deleteElement() : this.initCreateElement()
+    })
+    this.$bus.$on('later', val => {
+      this.playPick = val
+      console.log(this.playPick)
     })
     this.initCreateElement()
   },
@@ -149,18 +153,21 @@ export default {
       if (obj) {
         return this.close(n.info.name);
       }
-      this.audio.unshift(music);
-      this.open(n.info.name);
-      this.$refs.aplayer.switch(0)
-      setTimeout(() => {
-        this.$refs.aplayer.play()
-      }, 300)
-      /*       this.audio.id = n.info.id;
-      this.audio.url = n.url;
-      this.audio.artist = n.info.ar[0].name;
-      this.audio.name = n.info.name
-      this.audio.cover = n.info.al.picUrl;
-      this.audio.lrc = n.lyric; */
+     if (this.playPick === true) {
+       this.audio.push(music);
+       this.Saveing(`歌曲: ${n.info.name}`, '以添加到播放到列等待播放');
+       console.log('push le ')
+       setTimeout(() => {
+         this.playPick = false
+       }, 5000)
+     } else {
+       this.audio.unshift(music);
+       this.open(n.info.name);
+       this.$refs.aplayer.switch(0)
+       setTimeout(() => {
+         this.$refs.aplayer.play()
+       }, 300)
+     }
     },
     deleteElement () {
       const q = document.querySelector(".clearMusic");
@@ -184,6 +191,7 @@ export default {
         // 创建清空列表按钮
         clearSpan.title = "清空播放列表";
         clearSpan.className = "clearMusic iconfont icon-lajitong";
+        clearSpan.style.bottom = '28px'
         parent.appendChild(clearSpan);
         clearSpan.addEventListener("click", this.clearMusic);
         // 上一首

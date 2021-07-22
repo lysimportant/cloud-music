@@ -6,7 +6,7 @@
       <div class="pxb" v-for="(item, index) in TopList" :key="index">
         <span @click="itemClick (item)">
           <i :style="{ position: 'absolute'}" class="iconfont play_icon icon-bofang"></i>
-          <img :src="item.coverImgUrl" alt="">
+          <img v-lazy="item.coverImgUrl" alt="">
           <span class="text_pxb">{{ item.updateFrequency }}</span>
         </span>
         <ul>
@@ -14,7 +14,7 @@
             <span :style="{ margin: '0 5px'}" :class="{ item_active: index + 1 < 4 }"> {{ index + 1 }} </span>
             <span> {{ songItem.name }} </span>
             <span v-show="songItem.alia[0]" :style="{ color: 'gray'}">( {{ songItem.alia[0] }} )</span>
-            <span :style="{ color: 'gray', float: 'right', marginRight: '5px'}" v-for="(authors, index) in songItem.ar">
+            <span :style="{ color: 'gray', float: 'right', marginRight: '5px'}" v-for="(authors, index) in songItem.ar" :key="index">
                {{ authors.name }}
             </span>
           </li>
@@ -26,25 +26,25 @@
     </div>
     <!--  歌手榜 -->
     <div class="pxb">
-        <span>
+        <span @click="$router.push('/home/singerleaderboard')">
           <i class="image_bg"></i>
           <span class="text_bg">歌手榜</span>
-          <img v-show="singer[0].picUrl" :src="singer[0].img1v1Url" alt="">
+          <img v-show="singer[0].picUrl" v-lazy="singer[0].img1v1Url" alt="">
         </span>
       <ul>
-        <li v-for="(singerItem, index) in singer" :key="index">
+        <li @click="singerClick(singerItem)" v-for="(singerItem, index) in singer" :key="index">
           <span :style="{ margin: '0 5px'}" :class="{ item_active: index + 1 < 4 }"> {{ index + 1 }} </span>
           <span> {{ singerItem.name }} </span>
         </li>
       </ul>
-      <span :style="{ margin: '20px 0 0 225px', cursor: 'pointer'}">查看全部
+      <span @click="$router.push('/home/singerleaderboard')" :style="{ margin: '20px 0 0 225px', cursor: 'pointer'}">查看全部
           <i :style="{ fontSize: '12px'}" class="iconfont icon-jiantou1"></i></span>
     </div>
     <!--  全球榜-->
     <div class="global">
       <div class="globalItme" @click="itemClick(item)" v-for="(item, index) in globalList" :key="index">
         <div class="img-wrap">
-          <img :src="item.coverImgUrl" alt="">
+          <img v-lazy="item.coverImgUrl" alt="">
           <i class="iconfont playCOunt icon-bofang"></i>
           <span class="playcount">
             <i class="iconfont icon-caret-right"></i>
@@ -88,9 +88,15 @@ export default {
     console.log(this.singer)
   },
   methods: {
+    // 进入歌单详情
     itemClick (item) {
       window.sessionStorage.setItem('id', item.id)
       this.$router.push(`/home/detail/${item.id}`)
+    },
+    // 点击歌手进入歌手详情
+    singerClick (item) {
+      window.sessionStorage.setItem('singerId', item.id)
+      this.$router.push('/home/singerdetail')
     }
   }
 }
@@ -182,6 +188,7 @@ h1 {
   width: 200px;
   height: 207px;
   display: block;
+  cursor: pointer;
   background: rgba(128, 0, 128, .5)
 }
 .text_bg {
@@ -191,6 +198,7 @@ h1 {
   font-size: 30px;
   color: #FFFFFF;
   z-index: 999;
+  cursor: pointer;
 }
 .text_pxb {
   position: absolute;

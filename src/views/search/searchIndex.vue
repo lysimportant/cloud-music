@@ -66,33 +66,36 @@
       </el-tab-pane>
 <!--      mv的显示-->
       <el-tab-pane label="MV" name="mv">
-        <div class="items">
-          <div class="item" v-for="(item, index) in MvData.list" :key="item.id">
-            <img  v-lazy="item.cover" alt="">
-<!--        播放数量-->
-            <div class="playCount">
+       <div class="mva">
+         <div class="items" >
+           <div class="item" v-for="(item, index) in MvData.list" :key="item.id">
+             <img  v-lazy="item.cover" alt="">
+             <!--        播放数量-->
+             <div class="playCount">
               <span>
                 <i class="iconfont icon-caret-right"></i>
                 {{ item.playCount | ellipsisPlayVolume }}
               </span>
-            </div>
+             </div>
              <!-- 时间 -->
-            <span class="time">{{ item.duration | formatDuration }}</span>
-            <!-- 信息 -->
-            <div class="info-wrap">
-              <div class="name">{{ item.name }}</div>
-              <address>{{ item.artistName }}</address>
-            </div>
-          </div>
-        </div>
-        <search-pagintion
-          :num="num"
-          :limit="searchQueryInfo.limit"
-          :total="MvData.total"
-          :page-size="mvPick"
-          @handleSizeChange="handleSizeChange"
-          @handleCurrentChange="handleCurrentChange"
-        />
+             <span class="time">{{ item.duration | formatDuration }}</span>
+             <!-- 信息 -->
+             <div class="info-wrap">
+               <div class="name">{{ item.name }}</div>
+               <address>{{ item.artistName }}</address>
+             </div>
+           </div>
+
+         </div>
+         <search-pagintion
+           :num="num"
+           :limit="searchQueryInfo.limit"
+           :total="MvData.total"
+           :page-size="mvPick"
+           @handleSizeChange="handleSizeChange"
+           @handleCurrentChange="handleCurrentChange"
+         />
+       </div>
       </el-tab-pane>
     </el-tabs>
   </div>

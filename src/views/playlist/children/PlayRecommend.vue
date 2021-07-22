@@ -5,8 +5,8 @@
       placement="bottom"
       trigger="hover">
       <el-button slot="reference">全部歌单 <i class="iconfont icon-jiantou1"></i></el-button>
-        <ul class="classification" v-for="(items, index) in classification">
-          <li class="li_" v-for="(item, index) in items">
+        <ul class="classification" v-for="(items, index) in classification" :key="index">
+          <li class="li_" :key="index" v-for="(item, index) in items">
             <span
               :class="[{ [item.icon]: index < 1 }, {iconfont : index < 1}]"
               @click="tarBarClick(item.name)">

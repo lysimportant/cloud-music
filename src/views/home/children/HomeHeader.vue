@@ -47,9 +47,9 @@
       </li>
       <li  @click='loginClick'>
         <span>
-          <i v-show="!userInfo.avatarUrl" class="icon-denglu iconfont"></i>
-        <img  v-show="userInfo.avatarUrl" v-lazy="userInfo.avatarUrl" alt="">
-        {{ userInfo.nickname ? userInfo.nickname : '登录 / 注册' }}
+          <i v-show="!userInfo.profile.avatarUrl" class="icon-denglu iconfont"></i>
+        <img  v-show="userInfo.profile.avatarUrl" v-lazy="userInfo.profile.avatarUrl" alt="">
+        {{ userInfo.profile.nickname ? userInfo.profile.nickname : '登录 / 注册' }}
         </span>
       </li>
       <!--      icon跳转  -->
@@ -189,7 +189,7 @@ export default {
       console.log(this.$root)
     },
     loginClick () {
-      if (!this.userInfo.nickname) {
+      if (!this.userInfo.profile.nickname) {
         this.$router.push('/login')
       }
     },
@@ -204,8 +204,9 @@ export default {
     },
     Detect () {
       if (window.sessionStorage.getItem('token')) {
-        if (!this.userInfo.avatarUrl) {
+        if (!this.userInfo.avatarUrl || !this.userInfo.profile.avatarUrl) {
           this.$store.dispatch('getUserData')
+          this.$store.dispatch('getUserInfo')
         }
       }
     }
@@ -245,7 +246,7 @@ export default {
           font-size 35px
           margin 0 10px
       &:nth-child(2)
-        margin 10px
+        margin 10px 5px
         .el-button
           margin auto 10px
       &:last-child
@@ -255,20 +256,21 @@ export default {
           margin 10px
           border-radius 20px
           padding-left 30px
-          width 300px
+          width 250px
           height 28px
         i
-          margin-left -91%
+          margin-left -90%
 
   /*right 新样式*/
   ol
     float right
+    box-sizing border-box
     margin-right 50px
-    max-height 50px!important
-    max-width  750px!important
+    //max-height 50px!important
+    //max-width  800px!important
     li
       float left
-      //display inline-block
+      display inline-block
       max-height 50px!important
       font-size 20px
       line-height 50px;
@@ -278,6 +280,11 @@ export default {
           margin 0 5px
       &:nth-child(2)
         font-size 20px
+        img
+          width 50px
+          border-radius 50%
+          vertical-align middle
+          padding-bottom 8px
       &:nth-child(3)
         i
           margin 5px

@@ -60,8 +60,7 @@
             (loginShow = !loginShow), $refs.longinRuleForm.resetFields();
             $refs.registerRuleForm.resetFields();
           "
-          >{{ loginShow ? "注册" : "返回登录" }}</el-button
-        >
+          >{{ loginShow ? "注册" : "返回登录" }}</el-button>
       </div>
     </div>
   </div>

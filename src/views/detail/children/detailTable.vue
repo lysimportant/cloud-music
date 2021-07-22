@@ -46,6 +46,10 @@
         "
         name="comment"
       >
+        <div class="comment">
+          <textarea v-model="commentText" name="comment" id="comment"></textarea>
+          <el-button @click="sendComment" class="sendComment">发送</el-button>
+        </div>
         <!--            精彩评论-->
         <comment :list="hotCommentList.list" :str="'精彩评论'" />
         <div class="load">
@@ -104,6 +108,7 @@ import {
   reqSongSub,
   reqCommentNew
 } from '@/api/songPlayList'
+import { reqSendComment } from '@/api/discover'
 import comment from '@/components/content/comment'
 export default {
   name: 'detailTable',
@@ -125,6 +130,12 @@ export default {
         list: [],
         total: 0
       },
+      commentInfo: {
+        t: 1,
+        type: 2,
+        id: this.$route.params.id * 1,
+        content : ''
+      },
       queryInfo: { // 请求体
         id: 0,
         type: 2,
@@ -140,10 +151,28 @@ export default {
         total: 0
       },
       num: 1, // 分页当前页码
-      count: 2
+      count: 2,
+      commentText: ''
     }
   },
   methods: {
+    // 发送评论
+    async sendComment () {
+     if (window.sessionStorage.getItem('token')) {
+       if (this.commentText.trim() === '') {
+         return this.$message.warning('请填写内容!再发评论~')
+       }
+       this.commentInfo.content = this.commentText
+       const { data: res } = await reqSendComment(this.commentInfo)
+       if (res.code !== 200 || res.code !== 201) {
+         return this.$message.error('发送失败!')
+       }else {
+         return this.$message.success('发送成功!')
+       }
+     } else {
+       this.$message.error('请先登录帐号!再评论~')
+     }
+    },
     handleClick (e) {
       console.log(e)
     },
@@ -273,5 +302,20 @@ export default {
 .icon-xingbie {
   color: green;
   background: rgba(255, 255, 0, 0.1);
+}
+/*评论区*/
+.comment {
+  height: 150px;
+}
+textarea {
+  display: inline-block;
+  margin: 10px 20px;
+  border: 1px solid #9f9f9f;
+  width: 95%;
+  height: 95%;
+}
+.sendComment {
+  float: right;
+  margin-right: 60px;
 }
 </style>

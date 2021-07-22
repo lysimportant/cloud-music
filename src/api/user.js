@@ -13,3 +13,22 @@ export const reqLoginState = () => {
     url: '/login/status'
   })
 }
+
+// 获取用户信息 , 歌单，收藏，mv, dj 数量
+export const reqUserSub = () => {
+  return ajax({
+    url: '/user/subcount'
+  })
+}
+//  /user/playlist
+// 获取用户歌单
+export const reqUserPlayList = uid => {
+  return ajax({
+    url: '/user/playlist',
+    params: {
+      uid,
+      limit: 30,
+      offset: 0
+    }
+  })
+}

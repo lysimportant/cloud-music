@@ -10,7 +10,7 @@ export function ajax (config) {
     // baseURL: 'http://120.78.137.246:3000',
     // baseURL: 'https://lianghj.top:3000',
     baseURL: BASE_URL,
-    timeout: 10000
+    timeout: 3000
   })
   // 请求拦截
   instance.interceptors.request.use(config => {
