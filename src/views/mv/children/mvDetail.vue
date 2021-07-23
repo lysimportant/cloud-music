@@ -7,11 +7,11 @@
 <!--      视频-->
       <div class="video-wrap">
         <video width="90%" :poster="image" controls height="400px">
-          <source :src="mv_Data.url" type="video/mp4">
+          <source :src="url" type="video/mp4">
           </source>
-          <source src="myvideo.ogv" type="video/ogg">
+          <source :src="url" type="video/ogg">
           </source>
-          <source src="myvideo.webm" type="video/webm">
+          <source :src="url" type="video/webm">
           </source>
           <object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">
             <param name="movie" value="myvideo.swf" />
@@ -101,7 +101,8 @@ export default {
         hotList: [0],
         total: 0
       },
-      image: '' // 图片双向绑定
+      image: '', // 图片双向绑定
+      url: ''
     }
   },
   created () {
@@ -132,6 +133,7 @@ export default {
     'mv_Data' (newValue, oldValue) {
       console.log(newValue)
       this.image = newValue.data.cover
+      this.url = newValue.url
     }
   }
 }

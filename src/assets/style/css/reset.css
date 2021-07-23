@@ -194,3 +194,10 @@ a {
 .clearfix {
   *zoom: 1;
 }
+.aplayer-volume-bar {
+  right: 0px!important;
+
+}
+.aplayer-volume, .aplayer-volume-bar {
+  width: 20px!important;
+}

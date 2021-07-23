@@ -8,6 +8,7 @@
       :fixed="minValue"
       :mini="minValue"
       state
+      mutex
       :volume=".5"
     />
   </div>
